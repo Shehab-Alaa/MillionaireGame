@@ -18,6 +18,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Random;
 import java.util.Set;
 
@@ -28,7 +30,7 @@ public class MainMenu extends AppCompatActivity {
 
     public static ArrayList<Questions> easyQuestions , mediumQuestions , hardQuestions , veryHardQuestions;
     public static int numberOfQuestions;
-    public static ArrayList<String> scoreMoney;
+    public static Queue<String> scoreMoney;
     public static ArrayList<Questions> gameQuestions;
     public static Questions currentQ;
     public static int usingFirstHelp , usingSecondHelp , usingThirdHelp;
@@ -53,7 +55,7 @@ public class MainMenu extends AppCompatActivity {
         veryHardQuestions = new ArrayList<Questions>();
         gameQuestions = new ArrayList<Questions>();
         currentQ = new Questions();
-        scoreMoney = new ArrayList<>();
+        scoreMoney = new LinkedList<String>();
 
         fillQuestionsFromFiles();
         numberOfQuestions = 0;

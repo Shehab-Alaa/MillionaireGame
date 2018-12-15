@@ -35,8 +35,7 @@ public class PopUpScore extends AppCompatActivity {
         correctAnswer = MediaPlayer.create(PopUpScore.this , R.raw.correct_answer);
         winner = MediaPlayer.create(this , R.raw.win_one_mili);
 
-        scoreMoney.setText(MainMenu.scoreMoney.get(0));
-        MainMenu.scoreMoney.remove(0);
+        scoreMoney.setText(MainMenu.scoreMoney.poll());
 
 
         if (MainMenu.scoreMoney.size() == 0)
