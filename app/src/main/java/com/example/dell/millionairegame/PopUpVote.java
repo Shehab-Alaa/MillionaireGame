@@ -49,12 +49,6 @@ public class PopUpVote extends AppCompatActivity {
         }
     }
 
-    /*
-    public void onResume()
-    {
-        super.onResume();
-    }
-*/
     public void setFullScreenApp()
     {
 
@@ -84,7 +78,6 @@ public class PopUpVote extends AppCompatActivity {
 
     public void fillVotes(int[] arr)
     {
-        int index = 0;
         int correctA = MainMenu.currentQ.getCorrectAnswer();
 
         Random percentage = new Random();

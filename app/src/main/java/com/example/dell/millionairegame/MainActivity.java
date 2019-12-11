@@ -3,7 +3,6 @@ package com.example.dell.millionairegame;
 import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
-import android.os.Build;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,19 +10,13 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.Button;
-import android.widget.TextClock;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Queue;
 import java.util.Random;
 import java.util.Set;
 
@@ -36,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
     public MediaPlayer background_track ;
     public MediaPlayer danger_track;
 
+    private LinearLayout answersLayout;
+    private LinearLayout questionLayout;
+    private LinearLayout helpersLayout;
 
     CountDownTimer cdt;
 
@@ -58,6 +54,10 @@ public class MainActivity extends AppCompatActivity {
         choiceC = findViewById(R.id.choice_3);
         choiceD = findViewById(R.id.choice_4);
 
+        questionLayout = findViewById(R.id.question_layout);
+        helpersLayout = findViewById(R.id.helpers_layout);
+        answersLayout = findViewById(R.id.answers_layout);
+
         no_of_questions = findViewById(R.id.no_questions);
         countDownTimer = findViewById(R.id.timer);
         question = findViewById(R.id.question);
@@ -65,9 +65,22 @@ public class MainActivity extends AppCompatActivity {
         back_track();
         timer();
 
+        // Animation Part
+
+        LayoutAnimationController leftLayoutAnimationController = AnimationUtils.loadLayoutAnimation(this, R.anim.layout_animation_slide_left);
+        answersLayout.setLayoutAnimation(leftLayoutAnimationController);
+
+        LayoutAnimationController fallDownAnimationController = AnimationUtils.loadLayoutAnimation(this, R.anim.layout_animation_fall_down);
+        questionLayout.setLayoutAnimation(fallDownAnimationController);
+
+        LayoutAnimationController rightLayoutAnimationController = AnimationUtils.loadLayoutAnimation(this, R.anim.layout_animation_slide_right);
+        helpersLayout.setLayoutAnimation(rightLayoutAnimationController);
+
         MainMenu.currentGame();
         MainMenu.numberOfQuestions++;
+
         no_of_questions.setText(MainMenu.numberOfQuestions + "/15");
+
         question.setText(MainMenu.currentQ.getQuestion());
 
         ForegroundColorSpan orangeChoice  = new ForegroundColorSpan(getResources().getColor(R.color.orange));
@@ -120,12 +133,12 @@ public class MainActivity extends AppCompatActivity {
                 MainMenu.usingFirstHelp++;
 
                 Random rand = new Random();
-                int n = MainMenu.currentQ.getCorrectAnswer();
+                int correct = MainMenu.currentQ.getCorrectAnswer();
                 Set<Integer> set = new HashSet<Integer>();
                 while (set.size() != 2)
                 {
-                    int number = 1+ rand.nextInt(4);
-                    if (number != n)
+                    int number = 1 + rand.nextInt(4);
+                    if (number != correct)
                         set.add(number);
                 }
 
@@ -311,14 +324,14 @@ public class MainActivity extends AppCompatActivity {
           danger_track.stop();
       cdt.cancel();
 
-      int correctA = MainMenu.currentQ.getCorrectAnswer();
-      if (choice == correctA)
+      int correct = MainMenu.currentQ.getCorrectAnswer();
+      if (choice == correct)
       {
           correctAnswer(choice);
       }
       else
       {
-          incorrectAnswer(choice , correctA);
+          incorrectAnswer(choice , correct);
       }
   }
 

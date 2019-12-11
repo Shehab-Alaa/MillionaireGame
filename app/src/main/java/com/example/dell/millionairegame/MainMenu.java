@@ -53,8 +53,10 @@ public class MainMenu extends AppCompatActivity {
         mediumQuestions = new ArrayList<Questions>();
         hardQuestions = new ArrayList<Questions>();
         veryHardQuestions = new ArrayList<Questions>();
+
         gameQuestions = new ArrayList<Questions>();
         currentQ = new Questions();
+
         scoreMoney = new LinkedList<String>();
 
         fillQuestionsFromFiles();

@@ -26,6 +26,7 @@ public class PopUpAnswer extends AppCompatActivity {
         friend_help.start();
 
         choice_answer = findViewById(R.id.answer);
+
         int correctChoice = MainMenu.currentQ.getCorrectAnswer();
         switch (correctChoice)
         {
@@ -42,8 +43,10 @@ public class PopUpAnswer extends AppCompatActivity {
                 choice_answer.setText("maybe D");
                 break;
         }
-        setWidthAndHeight();
 
+
+
+        setWidthAndHeight();
     }
 
 
